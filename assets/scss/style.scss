@@ -1,0 +1,10 @@
+$main-color: red;
+$secondary-color: blue;
+
+.block {
+    color: $secondary-color;
+
+    &__element {
+        display: block;
+    }
+}
