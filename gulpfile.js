@@ -1,19 +1,37 @@
 'use strict';
 
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var sourcemaps = require('gulp-sourcemaps');
+var gulp = require('gulp'),
+    sass = require('gulp-sass'),
+    sourcemaps = require('gulp-sourcemaps'),
+    browsersync = require('browser-sync').create(),
+    reload = browsersync.reload;
 
+const SOURCE = {
+  style: './src/scss/**/*.scss'
+}    
+const DIST = {
+  style: './dist/css/'
+}
 sass.compiler = require('node-sass');
 
-gulp.task('scss', function() {
-  return gulp.src('./assets/scss/**/*.scss')
+function scss() {
+  return gulp.src(SOURCE.style)
    .pipe(sourcemaps.init())
    .pipe(sass().on('error', sass.logError))
    .pipe(sourcemaps.write())
-   .pipe(gulp.dest('./assets/css'));
-})
+   .pipe(gulp.dest(DIST.style))
+   .pipe(browsersync.stream())
+}
+exports.style = scss;
 
-gulp.task('scss:watch', function(){
-  gulp.watch('./assets/scss/**/*.scss', gulp.series('scss'));
-})
+function serve() {
+  browsersync.init({
+    server: "./"
+  });
+
+  gulp.watch(SOURCE.style, gulp.series(scss));
+  gulp.watch('./**/*.html').on('change', reload);
+}
+
+exports.serve = gulp.series(scss, serve);
+exports.default = exports.serve;

@@ -4,7 +4,7 @@
   "description": "This is a project in which we create posters using Front-End code",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,7 @@
   "homepage": "https://github.com/csssavvy/poster-project#readme",
   "dependencies": {},
   "devDependencies": {
+    "browser-sync": "^2.26.7",
     "gulp": "^4.0.2",
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.5",
