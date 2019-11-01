@@ -7,11 +7,13 @@ var gulp = require('gulp'),
     reload = browsersync.reload;
 
 const SOURCE = {
-  style: './src/scss/**/*.scss'
+  style: './src/scss/**/*.scss',
+  html: './**/*.html'
 }    
 const DIST = {
   style: './dist/css/'
 }
+
 sass.compiler = require('node-sass');
 
 function scss() {
@@ -30,7 +32,7 @@ function serve() {
   });
 
   gulp.watch(SOURCE.style, gulp.series(scss));
-  gulp.watch('./**/*.html').on('change', reload);
+  gulp.watch(SOURCE.html).on('change', reload);
 }
 
 exports.serve = gulp.series(scss, serve);
